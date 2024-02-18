@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="create-sample-table" author="matrasj">
+        <createTable tableName="sample">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="code" type="varchar">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="removed" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="registration_date" type="timestamp without time zone">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="project_id" type="bigint">
+                <constraints foreignKeyName="fk_sample_project"
+                referencedColumnNames="id" referencedTableName="project"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
